@@ -40,7 +40,7 @@ class Nota {
         : 'Reprovado'}';
   }
 
-  Map<String, dynamic> toJason() {
+  Map<String, dynamic> toJson() {
     return {
       'id': _id,
       'estudanteId': _estudanteId,
