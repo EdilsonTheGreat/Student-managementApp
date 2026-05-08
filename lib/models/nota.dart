@@ -12,10 +12,11 @@ class Nota {
     required int estudanteId,
     required int disciplinaId,
     required double valor,
-  }) : _id = id,
-       _estudanteId = estudanteId,
-       _disciplinaId = disciplinaId,
-       _valor = valor;
+  })
+      : _id = id,
+        _estudanteId = estudanteId,
+        _disciplinaId = disciplinaId,
+        _valor = valor;
 
   double get valor => _valor;
 
@@ -34,7 +35,26 @@ class Nota {
   bool get aprovado => _valor >= 10;
 
   String detalhes(Estudante estudante, Disciplina disciplina) {
-    return 'Nota de ${estudante.nome} em ${disciplina.nome}: $_valor(${aprovado ? 'Aprovado' : 'Reprovado'}';
+    return 'Nota de ${estudante.nome} em ${disciplina.nome}: $_valor(${aprovado
+        ? 'Aprovado'
+        : 'Reprovado'}';
+  }
+
+  Map<String, dynamic> toJason() {
+    return {
+      'id': _id,
+      'estudanteId': _estudanteId,
+      'disciplinaId': _disciplinaId,
+      'valor': _valor,
+    };
+  }
+
+  factory Nota.fromJson(Map<String, dynamic> json){
+    return Nota(id: json['id'],
+        estudanteId: json['estudanteId'],
+        disciplinaId: json['disciplinaId'],
+        valor: json['valor'],
+    );
   }
 
   @override

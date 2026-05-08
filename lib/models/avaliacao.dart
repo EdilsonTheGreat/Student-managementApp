@@ -9,10 +9,11 @@ class Avaliacao {
     required String nome,
     required double peso,
     required int disciplinaId,
-  }) : _id = id,
-       _nome = nome,
-       _peso = peso,
-       _disciplinaId = disciplinaId;
+  })
+      : _id = id,
+        _nome = nome,
+        _peso = peso,
+        _disciplinaId = disciplinaId;
 
   int get disciplinaId => _disciplinaId;
 
@@ -29,9 +30,28 @@ class Avaliacao {
   }
 
   set nome(String Nome) {
-    if (Nome.trim().isEmpty)
+    if (Nome
+        .trim()
+        .isEmpty)
       throw ArgumentError('O campo nao pode estar vazio');
     _nome = Nome;
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': _id,
+      'nome': _nome,
+      'peso': _peso,
+      'disciplinaId': _disciplinaId,
+    };
+  }
+
+  factory Avaliacao.fromJson(Map<String, dynamic> json){
+    return Avaliacao(id: json['id'],
+        nome: json['nome'],
+        peso: json['peso'],
+        disciplinaId: json['disciplinaId'],
+    );
   }
 
   @override
