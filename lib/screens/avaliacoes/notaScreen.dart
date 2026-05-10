@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Notascreen extends StatelessWidget {
-  const Notascreen({super.key});
+class NotaScreen extends StatelessWidget {
+  const NotaScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

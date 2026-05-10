@@ -40,6 +40,13 @@ class Nota {
         : 'Reprovado'}';
   }
 
+  double calcularMedia(List<Nota>notas){
+    if(notas.isEmpty)return 0;
+    final soma = notas.fold(0.0, (total,n) => total +n.valor);
+    return soma/notas.length;
+
+  }
+
   Map<String, dynamic> toJson() {
     return {
       'id': _id,

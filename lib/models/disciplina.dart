@@ -9,10 +9,11 @@ class Disciplina {
     required String nome,
     required String codigo,
     required int creditos,
-  }) : _id = id,
-       _nome = nome,
-       _codigo = codigo,
-       _creditos = creditos;
+  })
+      : _id = id,
+        _nome = nome,
+        _codigo = codigo,
+        _creditos = creditos;
 
   // Getters
   int get id => _id;
@@ -25,13 +26,32 @@ class Disciplina {
 
   // Setters com validação
   set nome(String nome) {
-    if (nome.trim().isEmpty) throw ArgumentError('Nome não pode ser vazio');
+    if (nome
+        .trim()
+        .isEmpty) throw ArgumentError('Nome não pode ser vazio');
     _nome = nome;
   }
 
   set creditos(int creditos) {
     if (creditos <= 0) throw ArgumentError('Créditos devem ser maior que zero');
     _creditos = creditos;
+  }
+
+  Map<String, dynamic> toJson() =>
+      {
+        'id': _id,
+        'nome': _nome,
+        'codigo': _codigo,
+        'creditos': _creditos,
+      };
+
+  factory Disciplina.fromJson(Map<String, dynamic> json){
+    return Disciplina(
+        id: json['id'],
+        nome: json['nome'],
+        codigo: json['codigo'],
+        creditos: json['creditos'],
+    );
   }
 
   @override

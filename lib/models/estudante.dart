@@ -9,10 +9,11 @@ class Estudante {
     required String nome,
     required String numero,
     required String email,
-  }) : _id = id,
-       _nome = nome,
-       _numero = numero,
-       _email = email;
+  })
+      : _id = id,
+        _nome = nome,
+        _numero = numero,
+        _email = email;
 
   // Getters
   int get id => _id;
@@ -25,13 +26,32 @@ class Estudante {
 
   // Setters com validação
   set nome(String Nome) {
-    if (Nome.trim().isEmpty) throw ArgumentError('Nome não pode ser vazio');
+    if (Nome
+        .trim()
+        .isEmpty) throw ArgumentError('Nome não pode ser vazio');
     _nome = Nome;
   }
 
   set email(String Email) {
     if (!Email.contains('@')) throw ArgumentError('Email inválido');
     _email = Email;
+  }
+
+  Map<String, dynamic> toJson() =>
+      {
+        'id': _id,
+        'nome': _nome,
+        'numero': _numero,
+        'email': _email,
+      };
+
+  factory Estudante.fromJson(Map<String, dynamic> json){
+    return Estudante(
+        id: json['id'],
+        nome: json['nome'],
+        numero: json['numero'],
+        email: json['email'],
+    );
   }
 
   @override

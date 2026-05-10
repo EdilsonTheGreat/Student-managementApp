@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:studente_managementapp/models/disciplina.dart';
+import 'package:studente_managementapp/models/nota.dart';
+import 'package:studente_managementapp/services/storageServ.dart';
 
 class Estatisticasscreen extends StatelessWidget {
   const Estatisticasscreen({super.key});
@@ -19,6 +22,18 @@ class _Estatisticas extends StatefulWidget {
 }
 
 class _EstatisticasState extends State<_Estatisticas> {
+  Storageserv _storage = Storageserv();
+  List<Disciplina> _disciplinas = [];
+  List<Nota> _notas = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    //carregar();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
