@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:studente_managementapp/controlers/estudante_ctr.dart';
 import 'package:studente_managementapp/models/estudante.dart';
 
-
 class EstudanteScreen extends StatelessWidget {
   const EstudanteScreen({super.key});
 
@@ -177,8 +176,12 @@ class _EstudanteBodyState extends State<_EstudanteBody> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Estudantes',
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+        title: const Text(
+          'Estudantes',
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: Colors.brown,
+        foregroundColor: Colors.white,
       ),
       body: Column(
         children: [
@@ -199,35 +202,37 @@ class _EstudanteBodyState extends State<_EstudanteBody> {
             child: _estudantesFiltrados.isEmpty
                 ? const Center(child: Text('Nenhum estudante encontrado.'))
                 : ListView.builder(
-              itemCount: _estudantesFiltrados.length,
-              itemBuilder: (context, index) {
-                final e = _estudantesFiltrados[index];
-                return Card(
-                  elevation: 2,
-                  child: ListTile(
-                    title: Text(e.nome),
-                    subtitle: Text(e.numero),
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            _preencher(e);
-                            _mostrarFormulario();
-                          },
-                          icon: const Icon(Icons.edit),
+                    itemCount: _estudantesFiltrados.length,
+                    itemBuilder: (context, index) {
+                      final e = _estudantesFiltrados[index];
+                      return Card(
+                        elevation: 2,
+                        child: ListTile(
+                          title: Text(e.nome),
+                          subtitle: Text(e.numero),
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  _preencher(e);
+                                  _mostrarFormulario();
+                                },
+                                icon: const Icon(Icons.edit),
+                              ),
+                              IconButton(
+                                onPressed: () => _confirmarRemocao(e),
+                                icon: const Icon(
+                                  Icons.delete,
+                                  color: Colors.red,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                        IconButton(
-                          onPressed: () => _confirmarRemocao(e),
-                          icon: const Icon(Icons.delete,
-                              color: Colors.red),
-                        ),
-                      ],
-                    ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
           ),
         ],
       ),

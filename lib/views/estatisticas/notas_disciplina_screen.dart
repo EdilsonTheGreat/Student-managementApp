@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:studente_managementapp/controlers/avaliacao_ctr.dart';
 import 'package:studente_managementapp/controlers/notas_ctr.dart';
@@ -7,7 +5,6 @@ import 'package:studente_managementapp/models/avaliacao.dart';
 import 'package:studente_managementapp/models/disciplina.dart';
 import 'package:studente_managementapp/models/estudante.dart';
 import 'package:studente_managementapp/models/nota.dart';
-
 
 class NotasDisciplinaScreen extends StatelessWidget {
   const NotasDisciplinaScreen({super.key});
@@ -69,9 +66,11 @@ class _DisciplinaNotasState extends State<_DisciplinaNotas> {
   List<Nota> get _notasFiltradas {
     if (_disciplinaSelect == null || _avaliacaoSelect == null) return [];
     return _notas
-        .where((n) =>
-    n.disciplinaId == _disciplinaSelect!.id &&
-        n.avaliacaoId == _avaliacaoSelect!.id)
+        .where(
+          (n) =>
+              n.disciplinaId == _disciplinaSelect!.id &&
+              n.avaliacaoId == _avaliacaoSelect!.id,
+        )
         .toList();
   }
 
@@ -82,17 +81,23 @@ class _DisciplinaNotasState extends State<_DisciplinaNotas> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Notas por Disciplina')),
+      appBar: AppBar(
+        title: const Text(
+          'Notas por Disciplina',
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: Colors.brown,
+        foregroundColor: Colors.white,
+      ),
       body: Column(
         children: [
           DropdownButton<Disciplina>(
             isExpanded: true,
             hint: const Text('Seleciona Disciplina'),
             value: _disciplinaSelect,
-            items: _disciplinas.map((d) => DropdownMenuItem(
-              value: d,
-              child: Text(d.nome),
-            )).toList(),
+            items: _disciplinas
+                .map((d) => DropdownMenuItem(value: d, child: Text(d.nome)))
+                .toList(),
             onChanged: _onDisciplinaChanged,
           ),
           const SizedBox(height: 12),
@@ -100,10 +105,14 @@ class _DisciplinaNotasState extends State<_DisciplinaNotas> {
             isExpanded: true,
             hint: const Text('Seleciona Tipo de Avaliação'),
             value: _avaliacaoSelect,
-            items: _avaliacoesFiltradas.map((a) => DropdownMenuItem(
-              value: a,
-              child: Text('${a.nome} (${a.cotacao} pts)'),
-            )).toList(),
+            items: _avaliacoesFiltradas
+                .map(
+                  (a) => DropdownMenuItem(
+                    value: a,
+                    child: Text('${a.nome} (${a.cotacao} pts)'),
+                  ),
+                )
+                .toList(),
             onChanged: (a) => setState(() => _avaliacaoSelect = a),
           ),
           const Divider(),
@@ -111,21 +120,21 @@ class _DisciplinaNotasState extends State<_DisciplinaNotas> {
             child: _notasFiltradas.isEmpty
                 ? const Center(child: Text('Nenhuma nota encontrada.'))
                 : ListView.builder(
-              itemCount: _notasFiltradas.length,
-              itemBuilder: (context, index) {
-                final n = _notasFiltradas[index];
-                return ListTile(
-                  title: Text(_nomeEstudante(n.estudanteId)),
-                  trailing: Text(
-                    n.valor.toString(),
-                    style: TextStyle(
-                      color: n.aprovado ? Colors.green : Colors.red,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    itemCount: _notasFiltradas.length,
+                    itemBuilder: (context, index) {
+                      final n = _notasFiltradas[index];
+                      return ListTile(
+                        title: Text(_nomeEstudante(n.estudanteId)),
+                        trailing: Text(
+                          n.valor.toString(),
+                          style: TextStyle(
+                            color: n.aprovado ? Colors.green : Colors.red,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
           ),
         ],
       ),

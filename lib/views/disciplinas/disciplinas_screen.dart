@@ -1,8 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:studente_managementapp/controlers/disciplina_ctr.dart';
 import 'package:studente_managementapp/models/disciplina.dart';
-
 
 class DisciplinasScreen extends StatelessWidget {
   const DisciplinasScreen({super.key});
@@ -21,7 +19,8 @@ class _Disciplinab extends StatefulWidget {
 }
 
 class _DisciplinabState extends State<_Disciplinab> {
-  final DisciplinaCtr _operacoes = DisciplinaCtr() ;
+  final DisciplinaCtr _operacoes = DisciplinaCtr();
+
   List<Disciplina> _disciplinas = [];
   final _nomeCtrl = TextEditingController();
   final _codigoCtrl = TextEditingController();
@@ -115,7 +114,14 @@ class _DisciplinabState extends State<_Disciplinab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Disciplinas')),
+      appBar: AppBar(
+        title: const Text(
+          'Disciplinas',
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: Colors.brown,
+        foregroundColor: Colors.white,
+      ),
       body: Column(
         children: [
           TextField(
@@ -136,35 +142,37 @@ class _DisciplinabState extends State<_Disciplinab> {
           const SizedBox(height: 12),
           ElevatedButton(
             onPressed: _salvar,
-            child: Text(_edit == null ? 'Criar Disciplina' : 'Guardar Alterações'),
+            child: Text(
+              _edit == null ? 'Criar Disciplina' : 'Guardar Alterações',
+            ),
           ),
           const Divider(),
           Expanded(
             child: _disciplinas.isEmpty
                 ? const Center(child: Text('Nenhuma disciplina registada.'))
                 : ListView.builder(
-              itemCount: _disciplinas.length,
-              itemBuilder: (context, index) {
-                final d = _disciplinas[index];
-                return ListTile(
-                  title: Text(d.nome),
-                  subtitle: Text('${d.codigo} · ${d.creditos} créditos'),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      IconButton(
-                        icon: const Icon(Icons.edit),
-                        onPressed: () => _preencher(d),
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.delete, color: Colors.red),
-                        onPressed: () => _confirmarRemocao(d),
-                      ),
-                    ],
+                    itemCount: _disciplinas.length,
+                    itemBuilder: (context, index) {
+                      final d = _disciplinas[index];
+                      return ListTile(
+                        title: Text(d.nome),
+                        subtitle: Text('${d.codigo} · ${d.creditos} créditos'),
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.edit),
+                              onPressed: () => _preencher(d),
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.delete, color: Colors.red),
+                              onPressed: () => _confirmarRemocao(d),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
           ),
         ],
       ),

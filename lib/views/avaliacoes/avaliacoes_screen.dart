@@ -4,8 +4,6 @@ import 'package:studente_managementapp/models/avaliacao.dart';
 import 'package:studente_managementapp/models/disciplina.dart';
 import 'package:studente_managementapp/views/avaliacoes/lancamento_notas_screen.dart';
 
-
-
 class AvaliacoesScreen extends StatelessWidget {
   const AvaliacoesScreen({super.key});
 
@@ -37,9 +35,7 @@ class _AvaliacoesState extends State<_Avaliacoes> {
   }
 
   void _mostrarMSG(String msg) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(msg)),
-    );
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
   }
 
   Future<void> _carregar() async {
@@ -104,19 +100,16 @@ class _AvaliacoesState extends State<_Avaliacoes> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Avaliações')),
+      appBar: AppBar(
+        title: const Text(
+          'Avaliações',
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: Colors.brown,
+        foregroundColor: Colors.white,
+      ),
       body: Column(
         children: [
-          ElevatedButton(onPressed: (){
-            Navigator.push(context,
-              MaterialPageRoute(builder: (context)=> LancamentoNotasScreen()),
-            );
-          },
-            child: const Text('Lancamento de Notas'),
-          ),
-          const SizedBox(height: 12),
-          const Divider(height: 32),
-          Text('Criar avaliacao', style: TextStyle(fontSize: 25, ),),
           TextField(
             controller: _nomeCtrl,
             decoration: const InputDecoration(labelText: 'Nome da Avaliação'),
@@ -132,10 +125,9 @@ class _AvaliacoesState extends State<_Avaliacoes> {
             isExpanded: true,
             hint: const Text('Selecione a Disciplina'),
             value: _disciplinaSelect,
-            items: _disciplinas.map((d) => DropdownMenuItem(
-              value: d,
-              child: Text(d.nome),
-            )).toList(),
+            items: _disciplinas
+                .map((d) => DropdownMenuItem(value: d, child: Text(d.nome)))
+                .toList(),
             onChanged: (d) => setState(() => _disciplinaSelect = d),
           ),
           const SizedBox(height: 16),
@@ -149,21 +141,21 @@ class _AvaliacoesState extends State<_Avaliacoes> {
             child: _avaliacoes.isEmpty
                 ? const Center(child: Text('Nenhuma avaliação registada.'))
                 : ListView.builder(
-              itemCount: _avaliacoes.length,
-              itemBuilder: (context, index) {
-                final a = _avaliacoes[index];
-                return ListTile(
-                  title: Text(a.nome),
-                  subtitle: Text(
-                    '${_operacoes.nomeDisciplina(_disciplinas, a.disciplinaId)} · Cotacao: ${(a.cotacao)}',
+                    itemCount: _avaliacoes.length,
+                    itemBuilder: (context, index) {
+                      final a = _avaliacoes[index];
+                      return ListTile(
+                        title: Text(a.nome),
+                        subtitle: Text(
+                          '${_operacoes.nomeDisciplina(_disciplinas, a.disciplinaId)} · Cotacao: ${(a.cotacao)}',
+                        ),
+                        trailing: IconButton(
+                          icon: const Icon(Icons.delete, color: Colors.red),
+                          onPressed: () => _confirmarRemocao(a),
+                        ),
+                      );
+                    },
                   ),
-                  trailing: IconButton(
-                    icon: const Icon(Icons.delete, color: Colors.red),
-                    onPressed: () => _confirmarRemocao(a),
-                  ),
-                );
-              },
-            ),
           ),
         ],
       ),

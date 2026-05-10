@@ -1,6 +1,3 @@
-
-
-
 import 'package:flutter/material.dart';
 import 'package:studente_managementapp/controlers/inscricao_ctr.dart';
 import 'package:studente_managementapp/models/disciplina.dart';
@@ -95,63 +92,68 @@ class _InscricaoBodyState extends State<_InscricaoBody> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Inscrição')),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            TextField(
-              onChanged: _pesquisar,
-              decoration: const InputDecoration(
-                hintText: 'Pesquisar estudante',
-                prefixIcon: Icon(Icons.search),
-                border: OutlineInputBorder(),
-              ),
-            ),
-            const SizedBox(height: 15),
-            Expanded(
-              child: _estudantesFiltrados.isEmpty
-                  ? const Center(child: Text('Nenhum estudante encontrado.'))
-                  : ListView.builder(
-                itemCount: _estudantesFiltrados.length,
-                itemBuilder: (context, index) {
-                  final e = _estudantesFiltrados[index];
-                  return Card(
-                    child: ListTile(
-                      title: Text(e.nome),
-                      subtitle: Text(e.numero),
-                      selected: _estudanteSelect == e,
-                      onTap: () => setState(() => _estudanteSelect = e),
-                    ),
-                  );
-                },
-              ),
-            ),
-            const SizedBox(height: 15),
-            DropdownButtonFormField<Disciplina>(
-              value: _disciplinaSelect,
-              decoration: const InputDecoration(
-                labelText: 'Disciplina',
-                border: OutlineInputBorder(),
-              ),
-              items: _disciplinas.map((d) => DropdownMenuItem(
-                value: d,
-                child: Text(d.nome),
-              )).toList(),
-              onChanged: (d) => setState(() => _disciplinaSelect = d),
-            ),
-            const SizedBox(height: 20),
-            SizedBox(
-              width: double.infinity,
-              height: 50,
-              child: ElevatedButton(
-                onPressed: _inscrever,
-                child: const Text('Inscrever'),
-              ),
-            ),
-          ],
+        appBar: AppBar(title: const Text('Inscrição',
+            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)
         ),
-      ),
+          backgroundColor: Colors.brown,
+          foregroundColor: Colors.white,
+        ),
+    body: Padding(
+    padding: const EdgeInsets.all(16),
+    child: Column(
+    children: [
+    TextField(
+    onChanged: _pesquisar,
+    decoration: const InputDecoration(
+    hintText: 'Pesquisar estudante',
+    prefixIcon: Icon(Icons.search),
+    border: OutlineInputBorder(),
+    ),
+    ),
+    const SizedBox(height: 15),
+    Expanded(
+    child: _estudantesFiltrados.isEmpty
+    ? const Center(child: Text('Nenhum estudante encontrado.'))
+        : ListView.builder(
+    itemCount: _estudantesFiltrados.length,
+    itemBuilder: (context, index) {
+    final e = _estudantesFiltrados[index];
+    return Card(
+    child: ListTile(
+    title: Text(e.nome),
+    subtitle: Text(e.numero),
+    selected: _estudanteSelect == e,
+    onTap: () => setState(() => _estudanteSelect = e),
+    ),
+    );
+    },
+    ),
+    ),
+    const SizedBox(height: 15),
+    DropdownButtonFormField<Disciplina>(
+    value: _disciplinaSelect,
+    decoration: const InputDecoration(
+    labelText: 'Disciplina',
+    border: OutlineInputBorder(),
+    ),
+    items: _disciplinas.map((d) => DropdownMenuItem(
+    value: d,
+    child: Text(d.nome),
+    )).toList(),
+    onChanged: (d) => setState(() => _disciplinaSelect = d),
+    ),
+    const SizedBox(height: 20),
+    SizedBox(
+    width: double.infinity,
+    height: 50,
+    child: ElevatedButton(
+    onPressed: _inscrever,
+    child: const Text('Inscrever'),
+    ),
+    ),
+    ],
+    ),
+    ),
     );
   }
 }

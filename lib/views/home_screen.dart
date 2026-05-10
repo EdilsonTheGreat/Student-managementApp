@@ -25,7 +25,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
 
   final ButtonStyle _estilo = ElevatedButton.styleFrom(
-    backgroundColor: Colors.indigo,
+    backgroundColor: Colors.brown,
     foregroundColor: Colors.white,
     elevation: 2,
     padding: const EdgeInsets.symmetric(vertical: 14),
@@ -34,7 +34,7 @@ class _HomeState extends State<Home> {
     ),
     textStyle: const TextStyle(
       fontSize: 16,
-      fontWeight: FontWeight.w500,
+      fontWeight: FontWeight.bold,
     ),
   );
 
@@ -46,11 +46,11 @@ class _HomeState extends State<Home> {
           'Gestão de Notas',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        backgroundColor: Colors.indigo,
+        backgroundColor: Colors.brown,
         foregroundColor: Colors.white,
         elevation: 0,
       ),
-      backgroundColor: Colors.grey.shade100,
+
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -61,8 +61,8 @@ class _HomeState extends State<Home> {
               'Registo',
               style: TextStyle(
                 fontSize: 14,
-                color: Colors.grey,
-                fontWeight: FontWeight.w600,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 10),
@@ -108,8 +108,8 @@ class _HomeState extends State<Home> {
               'Visualização',
               style: TextStyle(
                 fontSize: 14,
-                color: Colors.grey,
-                fontWeight: FontWeight.w600,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 10),

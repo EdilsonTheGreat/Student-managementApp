@@ -1,6 +1,3 @@
-
-
-
 import 'package:flutter/material.dart';
 import 'package:studente_managementapp/controlers/avaliacao_ctr.dart';
 import 'package:studente_managementapp/controlers/notas_ctr.dart';
@@ -9,7 +6,6 @@ import 'package:studente_managementapp/models/disciplina.dart';
 import 'package:studente_managementapp/models/estudante.dart';
 import 'package:studente_managementapp/models/inscricao.dart';
 import 'package:studente_managementapp/models/nota.dart';
-
 
 class LancamentoNotasScreen extends StatelessWidget {
   const LancamentoNotasScreen({super.key});
@@ -122,17 +118,23 @@ class _LancamentoNotasState extends State<_LancamentoNotas> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Lançamento de Notas')),
+      appBar: AppBar(
+        title: const Text(
+          'Lançamento de Notas',
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: Colors.brown,
+        foregroundColor: Colors.white,
+      ),
       body: Column(
         children: [
           DropdownButton<Estudante>(
             isExpanded: true,
             hint: const Text('Seleciona Estudante'),
             value: _estudanteSelect,
-            items: _estudantes.map((e) => DropdownMenuItem(
-              value: e,
-              child: Text(e.nome),
-            )).toList(),
+            items: _estudantes
+                .map((e) => DropdownMenuItem(value: e, child: Text(e.nome)))
+                .toList(),
             onChanged: _onEstudanteChanged,
           ),
           const SizedBox(height: 12),
@@ -140,10 +142,9 @@ class _LancamentoNotasState extends State<_LancamentoNotas> {
             isExpanded: true,
             hint: const Text('Seleciona Disciplina'),
             value: _disciplinaSelect,
-            items: _disciplinasDoEstudante.map((d) => DropdownMenuItem(
-              value: d,
-              child: Text(d.nome),
-            )).toList(),
+            items: _disciplinasDoEstudante
+                .map((d) => DropdownMenuItem(value: d, child: Text(d.nome)))
+                .toList(),
             onChanged: _onDisciplinaChanged,
           ),
           const SizedBox(height: 12),
@@ -151,10 +152,14 @@ class _LancamentoNotasState extends State<_LancamentoNotas> {
             isExpanded: true,
             hint: const Text('Seleciona Avaliação'),
             value: _avaliacaoSelect,
-            items: _avaliacoesDaDisciplina.map((a) => DropdownMenuItem(
-              value: a,
-              child: Text('${a.nome} (${a.cotacao} pts)'),
-            )).toList(),
+            items: _avaliacoesDaDisciplina
+                .map(
+                  (a) => DropdownMenuItem(
+                    value: a,
+                    child: Text('${a.nome} (${a.cotacao} pts)'),
+                  ),
+                )
+                .toList(),
             onChanged: (a) => setState(() => _avaliacaoSelect = a),
           ),
           const SizedBox(height: 12),
@@ -164,10 +169,7 @@ class _LancamentoNotasState extends State<_LancamentoNotas> {
             keyboardType: TextInputType.number,
           ),
           const SizedBox(height: 24),
-          ElevatedButton(
-            onPressed: _lancar,
-            child: const Text('Lançar Nota'),
-          ),
+          ElevatedButton(onPressed: _lancar, child: const Text('Lançar Nota')),
         ],
       ),
     );
