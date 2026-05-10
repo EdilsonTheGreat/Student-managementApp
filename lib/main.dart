@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:studente_managementapp/screens/avaliacoes/avaliacoesScreen.dart';
 import 'package:studente_managementapp/screens/avaliacoes/notaScreen.dart';
 import 'package:studente_managementapp/screens/estatisticas/estatisticasScreen.dart';
-import 'package:studente_managementapp/screens/estatisticas/homeScreen.dart';
+import 'package:studente_managementapp/screens/homeScreen.dart';
+
 
 
 void main() {

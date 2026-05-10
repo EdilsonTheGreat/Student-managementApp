@@ -55,7 +55,7 @@ class Storageserv {
       return [];
     }
   }
-  
+
   Future<void> salvarEstudante(List<Estudante> estudante) async{
     try{
       final file = File('${await _pastaDoc}/estudantes.json');
@@ -106,7 +106,7 @@ class Storageserv {
     }
   }
 
-  Future<void> guardarAvalicoes(List<Avaliacao> avalicoes) async {
+  Future<void> salvarAvalicoes(List<Avaliacao> avalicoes) async {
     try {
       final file = File('${await _pastaDoc}/avaliacoes.json');
       final list = avalicoes.map((e) => e.toJson()).toList();
@@ -132,7 +132,7 @@ class Storageserv {
     }
   }
 
-  Future<void> guardarNotas(List<Nota> notas)async{
+  Future<void> salvarNotas(List<Nota> notas)async{
     try{
       final caminho = await _pastaDoc;
       final file = File('$caminho/notas.json');
