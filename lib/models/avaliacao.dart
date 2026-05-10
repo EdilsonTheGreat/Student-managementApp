@@ -1,32 +1,32 @@
 class Avaliacao {
   int _id;
   String _nome;
-  double _peso;
+  int _cotacao;
   int _disciplinaId;
 
   Avaliacao({
     required int id,
     required String nome,
-    required double peso,
+    required int cotacao,
     required int disciplinaId,
   })
       : _id = id,
         _nome = nome,
-        _peso = peso,
+        _cotacao = cotacao,
         _disciplinaId = disciplinaId;
 
   int get disciplinaId => _disciplinaId;
 
-  double get peso => _peso;
+  int get cotacao => _cotacao;
 
   String get nome => _nome;
 
   int get id => _id;
 
-  set peso(double Peso) {
-    if (Peso < 0 || Peso > 1)
+  set cotacao(int cotacao) {
+    if (cotacao < 0 || cotacao > 1)
       throw ArgumentError('O campo nao pode estar vazio');
-    _peso = Peso;
+    _cotacao = cotacao;
   }
 
   set nome(String Nome) {
@@ -41,7 +41,7 @@ class Avaliacao {
     return {
       'id': _id,
       'nome': _nome,
-      'peso': _peso,
+      'cotacao': _cotacao,
       'disciplinaId': _disciplinaId,
     };
   }
@@ -49,13 +49,13 @@ class Avaliacao {
   factory Avaliacao.fromJson(Map<String, dynamic> json){
     return Avaliacao(id: json['id'],
         nome: json['nome'],
-        peso: json['peso'],
+        cotacao: json['cotacao'],
         disciplinaId: json['disciplinaId'],
     );
   }
 
   @override
   String toString() {
-    return 'Avaliacao{_id: $_id, _nome: $_nome, _peso: $_peso, _disciplinaId: $_disciplinaId}';
+    return 'Avaliacao{_id: $_id, _nome: $_nome, _cotacao: $_cotacao, _disciplinaId: $_disciplinaId}';
   }
 }

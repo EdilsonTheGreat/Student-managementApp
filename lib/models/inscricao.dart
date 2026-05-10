@@ -7,33 +7,30 @@ class Inscricao {
     required int id,
     required int estudanteId,
     required int disciplinaId,
-  })
-      : _id = id,
+  })  : _id = id,
         _estudanteId = estudanteId,
         _disciplinaId = disciplinaId;
 
+  int get id => _id;
+  int get estudanteId => _estudanteId;
   int get disciplinaId => _disciplinaId;
 
-  int get estudanteId => _estudanteId;
+  Map<String, dynamic> toJson() => {
+    'id': _id,
+    'estudanteId': _estudanteId,
+    'disciplinaId': _disciplinaId,
+  };
 
-  int get id => _id;
-
-  Map<String, dynamic> toJson() =>
-      {
-        'id': _id,
-        'estudanteId': _estudanteId,
-        'disciplinaId': _disciplinaId,
-      };
-
-  factory Inscricao.fromJson(Map<String, dynamic>json){
-    return Inscricao(id: json['id'],
-        estudanteId: json['estudanteId'],
-        disciplinaId: json['diciplinaId'],
+  factory Inscricao.fromJson(Map<String, dynamic> json) {
+    return Inscricao(
+      id: json['id'] as int,
+      estudanteId: json['estudanteId'] as int,
+      disciplinaId: json['disciplinaId'] as int,
     );
   }
 
   @override
   String toString() {
-    return 'Inscricao{_id: $_id, _estudanteId: $_estudanteId, _disciplinaId: $_disciplinaId}';
+    return 'Inscricao(id: $_id, estudanteId: $_estudanteId, disciplinaId: $_disciplinaId)';
   }
 }

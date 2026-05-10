@@ -3,9 +3,9 @@
 
 import 'package:studente_managementapp/models/avaliacao.dart';
 import 'package:studente_managementapp/models/disciplina.dart';
-import 'package:studente_managementapp/services/storageServ.dart';
+import 'package:studente_managementapp/services/storage_serv.dart';
 
-class AvaliacaoOpera {
+class AvaliacaoCtr {
   final Storageserv _storage = Storageserv();
 
   Future<List<Avaliacao>> carregarAvaliacoes() async {
@@ -19,13 +19,13 @@ class AvaliacaoOpera {
   Future<void> adicionarAvaliacao(
       List<Avaliacao> avaliacoes,
       String nome,
-      double peso,
+      int cotacao,
       int disciplinaId,
       ) async {
     final nova = Avaliacao(
       id: DateTime.now().millisecondsSinceEpoch,
       nome: nome,
-      peso: peso,
+      cotacao: cotacao,
       disciplinaId: disciplinaId,
     );
     avaliacoes.add(nova);

@@ -5,17 +5,20 @@ class Nota {
   int _id;
   int _estudanteId;
   int _disciplinaId;
+  int _avaliacaoId;
   double _valor;
 
   Nota({
     required int id,
     required int estudanteId,
     required int disciplinaId,
+    required int avaliacaoId,
     required double valor,
   })
       : _id = id,
         _estudanteId = estudanteId,
         _disciplinaId = disciplinaId,
+        _avaliacaoId = avaliacaoId,
         _valor = valor;
 
   double get valor => _valor;
@@ -25,6 +28,8 @@ class Nota {
   int get estudanteId => _estudanteId;
 
   int get id => _id;
+
+  int get avaliacaoId => _avaliacaoId;
 
   set valor(double Valor) {
     if (Valor < 0 || valor > 20)
@@ -52,6 +57,7 @@ class Nota {
       'id': _id,
       'estudanteId': _estudanteId,
       'disciplinaId': _disciplinaId,
+      'avaliacaoId': _avaliacaoId,
       'valor': _valor,
     };
   }
@@ -60,12 +66,13 @@ class Nota {
     return Nota(id: json['id'],
         estudanteId: json['estudanteId'],
         disciplinaId: json['disciplinaId'],
+        avaliacaoId: json['avaliacaoId'],
         valor: json['valor'],
     );
   }
 
   @override
   String toString() {
-    return 'Nota{_id: $_id, _estudanteId: $_estudanteId, _disciplinaId: $_disciplinaId, _valor: $_valor}';
+    return 'Nota{_id: $_id, _estudanteId: $_estudanteId, _disciplinaId: $_disciplinaId, _avalicaoId: $_avaliacaoId, _valor: $_valor}';
   }
 }

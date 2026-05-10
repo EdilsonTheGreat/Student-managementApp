@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:studente_managementapp/controlers/avaliacao_ctr.dart';
 import 'package:studente_managementapp/models/avaliacao.dart';
 import 'package:studente_managementapp/models/disciplina.dart';
-import 'package:studente_managementapp/operacoes/avaliacaoOpera.dart';
+import 'package:studente_managementapp/views/avaliacoes/lancamento_notas_screen.dart';
+
 
 
 class AvaliacoesScreen extends StatelessWidget {
@@ -21,11 +23,11 @@ class _Avaliacoes extends StatefulWidget {
 }
 
 class _AvaliacoesState extends State<_Avaliacoes> {
-  final AvaliacaoOpera _operacoes = AvaliacaoOpera();
+  final AvaliacaoCtr _operacoes = AvaliacaoCtr();
   List<Avaliacao> _avaliacoes = [];
   List<Disciplina> _disciplinas = [];
   final _nomeCtrl = TextEditingController();
-  final _pesoCtrl = TextEditingController();
+  final _cotacaoCtrl = TextEditingController();
   Disciplina? _disciplinaSelect;
 
   @override
@@ -51,7 +53,7 @@ class _AvaliacoesState extends State<_Avaliacoes> {
 
   Future<void> _salvarAvaliacoes() async {
     if (_nomeCtrl.text.isEmpty ||
-        _pesoCtrl.text.isEmpty ||
+        _cotacaoCtrl.text.isEmpty ||
         _disciplinaSelect == null) {
       _mostrarMSG('Por favor preencha todos os campos');
       return;
@@ -60,13 +62,13 @@ class _AvaliacoesState extends State<_Avaliacoes> {
     await _operacoes.adicionarAvaliacao(
       _avaliacoes,
       _nomeCtrl.text,
-      double.parse(_pesoCtrl.text),
+      int.parse(_cotacaoCtrl.text),
       _disciplinaSelect!.id,
     );
 
     setState(() {});
     _nomeCtrl.clear();
-    _pesoCtrl.clear();
+    _cotacaoCtrl.clear();
     setState(() => _disciplinaSelect = null);
     _mostrarMSG('Avaliação adicionada com sucesso');
   }
@@ -105,14 +107,24 @@ class _AvaliacoesState extends State<_Avaliacoes> {
       appBar: AppBar(title: const Text('Avaliações')),
       body: Column(
         children: [
+          ElevatedButton(onPressed: (){
+            Navigator.push(context,
+              MaterialPageRoute(builder: (context)=> LancamentoNotasScreen()),
+            );
+          },
+            child: const Text('Lancamento de Notas'),
+          ),
+          const SizedBox(height: 12),
+          const Divider(height: 32),
+          Text('Criar avaliacao', style: TextStyle(fontSize: 25, ),),
           TextField(
             controller: _nomeCtrl,
             decoration: const InputDecoration(labelText: 'Nome da Avaliação'),
           ),
           const SizedBox(height: 12),
           TextField(
-            controller: _pesoCtrl,
-            decoration: const InputDecoration(labelText: 'Peso'),
+            controller: _cotacaoCtrl,
+            decoration: const InputDecoration(labelText: 'Cotacao'),
             keyboardType: TextInputType.number,
           ),
           const SizedBox(height: 12),
@@ -131,6 +143,7 @@ class _AvaliacoesState extends State<_Avaliacoes> {
             onPressed: _salvarAvaliacoes,
             child: const Text('Salvar Avaliação'),
           ),
+          const SizedBox(height: 12),
           const Divider(height: 32),
           Expanded(
             child: _avaliacoes.isEmpty
@@ -142,7 +155,7 @@ class _AvaliacoesState extends State<_Avaliacoes> {
                 return ListTile(
                   title: Text(a.nome),
                   subtitle: Text(
-                    '${_operacoes.nomeDisciplina(_disciplinas, a.disciplinaId)} · Peso: ${(a.peso * 100).toStringAsFixed(0)}%',
+                    '${_operacoes.nomeDisciplina(_disciplinas, a.disciplinaId)} · Cotacao: ${(a.cotacao)}',
                   ),
                   trailing: IconButton(
                     icon: const Icon(Icons.delete, color: Colors.red),

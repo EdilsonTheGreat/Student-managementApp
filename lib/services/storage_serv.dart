@@ -15,20 +15,23 @@ class Storageserv {
     return pasta.path;
   }
   //Incricoes
-  Future<List<Inscricao>> carregarInscricoes() async{
-    try{
+  Future<List<Inscricao>> carregarInscricoes() async {
+    try {
+      final file = File('${await _pastaDoc}/inscricoes.json');
+      print('Ficheiro existe: ${await file.exists()}');
+      print('Caminho: ${file.path}');
 
-      final file = File('${await _pastaDoc}/inscricao.json');
-      if(!await file.exists())
-        return [];
+      if (!await file.exists()) return [];
 
       final content = await file.readAsString();
+      print('Conteudo: $content');
+
       final List<dynamic> list = jsonDecode(content);
       return list.map((e) => Inscricao.fromJson(e)).toList();
-    }catch(e){
+    } catch (e) {
+      print('Erro: $e');
       return [];
     }
-    
   }
   
   Future<void> salvarInscricoes(List<Inscricao> inscricao) async{
