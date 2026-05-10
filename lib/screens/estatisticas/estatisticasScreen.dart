@@ -30,7 +30,27 @@ class _EstatisticasState extends State<_Estatisticas> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    //carregar();
+    _carregar();
+  }
+
+  Future<void> _carregar() async{
+    final disciplinas = await _storage.carregarDisciplinas();
+    final notas = await _storage.carregarNotas();
+    setState(() {
+      _disciplinas =disciplinas;
+      _notas = notas;
+    });
+  }
+
+   double _media(int disciplinaId){
+    final notas = _notas.where((e) => e.disciplinaId == disciplinaId).toList();
+   return Nota.calcularMedia(notas);
+  }
+
+  void mostrMSG(String msg){
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(msg)),
+    );
   }
 
 
@@ -40,7 +60,25 @@ class _EstatisticasState extends State<_Estatisticas> {
       appBar: AppBar(
         title: Text('Estatisticas'),
       ),
-      body: Center(child: Text('Processando'),),
+      body: _disciplinas.isEmpty? const Center(
+        child: Text('Nenhuma disciplina encontrada'),
+      ) : ListView.builder(
+        itemCount: _disciplinas.length,
+          itemBuilder: (context, index){
+            final disciplina = _disciplinas[index];
+            final media = _media(disciplina.id);
+              return ListTile(
+                title: Text(disciplina.nome),
+                subtitle: Text('Medis: ${media.toStringAsFixed(1)}'),
+                trailing: Text(
+                    media >= 10 ? 'Aprovado' : 'Reprovado',
+                  style: TextStyle(
+                    color: media >= 10 ? Colors.green : Colors.red,
+                  ),
+                ),
+              );
+          }
+          )
     );
   }
 }
