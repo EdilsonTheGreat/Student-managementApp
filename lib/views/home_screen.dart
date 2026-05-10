@@ -24,7 +24,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
-  final ButtonStyle _estilo = ElevatedButton.styleFrom(
+  final ButtonStyle estilo = ElevatedButton.styleFrom(
     backgroundColor: Colors.brown,
     foregroundColor: Colors.white,
     elevation: 2,
@@ -67,35 +67,35 @@ class _HomeState extends State<Home> {
             ),
             const SizedBox(height: 10),
             ElevatedButton(
-              style: _estilo,
+              style: estilo,
               onPressed: () => Navigator.push(context,
                   MaterialPageRoute(builder: (_) => EstudanteScreen())),
               child: const Text('Estudantes'),
             ),
             const SizedBox(height: 12),
             ElevatedButton(
-              style: _estilo,
+              style: estilo,
               onPressed: () => Navigator.push(context,
                   MaterialPageRoute(builder: (_) => DisciplinasScreen())),
               child: const Text('Disciplinas'),
             ),
             const SizedBox(height: 12),
             ElevatedButton(
-              style: _estilo,
+              style: estilo,
               onPressed: () => Navigator.push(context,
                   MaterialPageRoute(builder: (_) => InscricaoScreen())),
               child: const Text('Inscrições'),
             ),
             const SizedBox(height: 12),
             ElevatedButton(
-              style: _estilo,
+              style: estilo,
               onPressed: () => Navigator.push(context,
                   MaterialPageRoute(builder: (_) => AvaliacoesScreen())),
               child: const Text('Avaliações'),
             ),
             const SizedBox(height: 12),
             ElevatedButton(
-              style: _estilo,
+              style: estilo,
               onPressed: () => Navigator.push(context,
                   MaterialPageRoute(builder: (_) => LancamentoNotasScreen())),
               child: const Text('Lançamento de Notas'),
@@ -114,7 +114,7 @@ class _HomeState extends State<Home> {
             ),
             const SizedBox(height: 10),
             ElevatedButton(
-              style: _estilo,
+              style: estilo,
               onPressed: () => Navigator.push(context,
                   MaterialPageRoute(builder: (_) => NotasDisciplinaScreen())),
               child: const Text('Notas por Disciplina'),
